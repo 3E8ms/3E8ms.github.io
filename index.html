@@ -17,7 +17,7 @@ img{max-width:100%}
 <style>
 :root{
   --bg:#FFFFFF; --surface:#FAF8FC; --ink:#1E1A29; --muted:#6B6479; --line:#ECE7F1;
-  --accent:#D6336C; --accent-soft:#FFE8F0; --bar:#FFFFFF; --bar-line:rgba(30,26,41,.06); --stage:#FFFFFF; --stage-line:#E7E1EE;
+  --accent:#D6336C; --accent-soft:#FFE8F0; --stage:#FFFFFF; --stage-line:#E7E1EE;
   --display:"Cormorant Garamond", "Garamond", "Times New Roman", serif;
   --body:"Source Serif 4", "Georgia", "Times New Roman", serif;
   --mono:"Source Serif 4", "Georgia", "Times New Roman", serif;
@@ -26,13 +26,13 @@ img{max-width:100%}
   :root:not([data-theme="light"]){
     color-scheme:dark;
     --bg:#14121A; --surface:#1C1924; --ink:#F1EDF6; --muted:#A59DB3; --line:#2D2838;
-    --accent:#FF7AA8; --accent-soft:#3A1F2B; --bar:#14121A; --bar-line:rgba(255,255,255,.08); --stage:#1D1A25; --stage-line:#322C3E;
+    --accent:#FF7AA8; --accent-soft:#3A1F2B; --stage:#1D1A25; --stage-line:#322C3E;
   }
 }
 :root[data-theme="dark"]{
   color-scheme:dark;
   --bg:#14121A; --surface:#1C1924; --ink:#F1EDF6; --muted:#A59DB3; --line:#2D2838;
-  --accent:#FF7AA8; --accent-soft:#3A1F2B; --bar:#14121A; --bar-line:rgba(255,255,255,.08); --stage:#1D1A25; --stage-line:#322C3E;
+  --accent:#FF7AA8; --accent-soft:#3A1F2B; --stage:#1D1A25; --stage-line:#322C3E;
 }
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;padding-inline:20px;-webkit-font-smoothing:antialiased}
@@ -41,9 +41,8 @@ a{color:inherit}
 a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
 
 /* nav */
-.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;margin-inline:-20px;padding-inline:20px;background:var(--bar);-webkit-backdrop-filter:saturate(1.4) blur(14px);backdrop-filter:saturate(1.4) blur(14px);border-bottom:1px solid var(--bar-line)}
-nav{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-block:16px;max-width:1080px;margin:0 auto}
-section,header.hero,#photos{scroll-margin-top:90px}
+nav{position:sticky;top:0;z-index:20;background:var(--bg);box-shadow:0 0 0 100vmax var(--bg);clip-path:inset(0 -100vmax);display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-block:16px}
+section,header.hero{scroll-margin-top:90px}
 .mark{font-family:var(--display);font-weight:700;font-size:22px;letter-spacing:-.01em;text-decoration:none}
 .mark span{color:var(--accent)}
 nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0;flex-wrap:wrap}
@@ -83,7 +82,7 @@ h2{font-family:var(--display);font-weight:600;font-size:clamp(30px,4vw,42px);lin
 .when{font-family:var(--mono);font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;padding-top:3px}
 .job h3{font-family:var(--display);font-weight:700;font-size:24px;letter-spacing:-.01em;margin:0;line-height:1.3}
 .job .org{color:var(--muted);font-size:14.5px;margin:2px 0 10px}
-.job ul{margin:0;padding-left:18px;max-width:64ch}
+.job ul{margin:0;padding-left:18px;max-width:80ch}
 .job li{margin-bottom:4px;font-size:15px}
 .job li::marker{color:var(--accent)}
 
@@ -119,7 +118,7 @@ h2{font-family:var(--display);font-weight:600;font-size:clamp(30px,4vw,42px);lin
 .lightbox .close{position:absolute;top:calc(14px + env(safe-area-inset-top,0px));right:16px;font:500 14px var(--body);color:#fff;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.4);border-radius:999px;padding:6px 14px;cursor:pointer}
 
 /* skills */
-.skills{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+.skills{display:grid;grid-template-columns:repeat(2,minmax(0,4fr));gap:28px}
 .skills h3{font-family:var(--mono);font-weight:500;font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 12px}
 .chips{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:0;padding:0}
 .chips li{font-size:14px;padding:5px 12px;border-radius:999px;background:var(--surface);border:1px solid var(--line)}
@@ -161,7 +160,7 @@ footer{padding-bottom:96px}
 .intro{position:fixed;inset:0;z-index:50;background:linear-gradient(180deg,#C6E0F7 0%,#D8E7F8 30%,#EEE5F5 58%,#FBDDE8 82%,#FFEAF0 100%);color:#FFFFFF;overflow:hidden;display:grid;place-items:center;transition:opacity .9s ease,visibility .9s;padding-inline:16px;cursor:crosshair}
 .intro.gone{opacity:0;visibility:hidden}
 .intro canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
-.intro .clouds{position:absolute;left:-6%;bottom:-2px;width:112%;height:auto;z-index:1;animation:drift 22s ease-in-out infinite alternate}
+.intro .clouds{position:absolute;left:-6%;bottom:-2px;width:112%;height:auto;z-index:3;animation:drift 22s ease-in-out infinite alternate}
 @keyframes drift{from{transform:translateX(-2%)}to{transform:translateX(2%)}}
 @media (prefers-reduced-motion:reduce){.intro .clouds{animation:none}}
 .intro-inner{position:relative;z-index:3;padding-bottom:8vh;display:grid;justify-items:center;gap:30px;text-align:center}
@@ -175,7 +174,7 @@ footer{padding-bottom:96px}
 
 </head>
 <body>
-<div class="topbar">
+<div class="wrap">
   <nav>
     <a class="mark" href="#top">Lily Chen<span>.</span></a>
     <ul>
@@ -188,9 +187,6 @@ footer{padding-bottom:96px}
       <li><a href="#photos">Photos</a></li>
     </ul>
   </nav>
-  </div>
-<div class="wrap">
-
 
 <main id="home">
   <header class="hero" id="top">
@@ -208,12 +204,14 @@ footer{padding-bottom:96px}
       <div class="sec-label">About</div>
       <div>
         <h2>I build dependable software, from CLI interfaces to web front ends.</h2>
-        <p class="lede">I'm Lily, a software engineer based in Ottawa. I spent four and a half years at Ciena working on REST APIs, C/C++ command-line interfaces, and Python plugins for network resource services.</p>
-        <p>Before Ciena I worked at a Palo Alto startup, on BlackBerry's QNX Software Center, and on data tooling for the Ontario Ministry of Education. I care about clear interfaces, good test coverage, and finding the root cause of a defect instead of patching around it. I've also mentored co-op students along the way.</p>
-        <p>Outside work I build small full-stack projects: a daily task dashboard, a to-do app my friends use, and an image-posting site.</p>
+        <p class="lede"><i>I'm Lily, a software engineer based in Ottawa.</i> </p>
+        <p>I had 4.5 years experience in large, mature, production-grade codebases at <b>Ciena</b> working on system engineering in <b>C/C++</b>, <b>Python</b> plugins, gRPC and <b>REST APIs</b> for Resource Adapter releases.</p>
+        <p>In 2020, I worked at a Palo Alto startup called <b>'nuffsaid</b>, where I grew rapidly in a fast-paced startup environment, consistently shipping full-stack deliverables within short development cycles in <b>Python</b> and <b>TypeScript</b>.(React/Node.js/PostgreSQL/GCP)</p>
+        <p>During my stay at <b>BlackBerry</b>'s QNX Software Center, I worked as a full-stack developer using <b>Java</b> on the backend and <b>TypeScript</b> on the frontend. I built features end to end, from APIs and backend services to implementing the user-facing interface.(React/Node.js/Maven/MySQL)</p>
+        <p>Outside work I build small full-stack projects: a daily task dashboard, a to-do app for my friends use, an image-posting site...</p>
         <ul class="facts">
           <li><b>Based in</b> Ottawa, ON</li>
-          <li><b>Focus</b> Systems, APIs, full-stack development</li>
+          <li><b>Focus</b> Systems, Full-stack development</li>
         </ul>
       </div>
     </div>
@@ -227,7 +225,7 @@ footer{padding-bottom:96px}
         <div class="job edu">
           <div class="when">Sep 2015 – Aug 2020</div>
           <div>
-            <h3>Bachelor of Mathematics, Honours Computer Science</h3>
+            <h3>Bachelor of Mathematics, Co-op, Honours Computer Science</h3>
             <p class="org">Waterloo, Ontario, Canada</p>
           </div>
         </div>
@@ -342,19 +340,13 @@ footer{padding-bottom:96px}
           <div>
             <h3>Programming</h3>
             <ul class="chips">
-              <li class="hl">Python</li><li class="hl">C++</li><li class="hl">C</li><li>Java</li><li>JavaScript</li><li>VB</li>
+              <li class="hl">Python</li><li class="hl">C++</li><li class="hl">C</li><li class="hl">TypeScript</li><li>Java</li><li>JavaScript</li><li>VB</li>
             </ul>
           </div>
           <div>
-            <h3>Development</h3>
+            <h3>Development Tools</h3>
             <ul class="chips">
-              <li class="hl">Linux</li><li>Git</li><li>Node.js</li><li>Windows</li><li>Batch</li><li>VBA</li><li>JUnit</li>
-            </ul>
-          </div>
-          <div>
-            <h3>Front end</h3>
-            <ul class="chips">
-              <li class="hl">TypeScript</li><li class="hl">React</li><li>HTML</li><li>CSS</li><li>Mocha</li>
+              <li class="hl">Linux</li><li class="hl">Git</li><li class="hl">Node.js</li><li class="hl">React</li><li>HTML</li><li>CSS</li><li>Batch</li><li>PostgreSQL</li><li>GCP</li><li>AWS</li><li>Docker</li><li>Postman</li><li>JUnit</li><li>Mocha</li>
             </ul>
           </div>
         </div>
@@ -395,7 +387,7 @@ footer{padding-bottom:96px}
 </main>
 
 <main id="photos" class="photos-page" hidden>
-  <a class="back" href="#top">← Back to home</a>
+  <a class="back" href="#top">Back to home</a>
   <p class="eyebrow">Photos</p>
   <h1 class="photos-title">Moments of My Life</h1>
   <ul class="gallery">
@@ -415,7 +407,7 @@ footer{padding-bottom:96px}
   <audio id="bgm" src="bgm.mp3" loop preload="auto"></audio>
 <button class="bgm" id="bgmBtn" type="button" aria-pressed="false" hidden>
   <span class="disc" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>
-  <span class="t"><span id="bgmLabel">Pause music</span><span class="sub">Look Up at the Evening Stars</span></span>
+  <span class="t"><span id="bgmLabel">Pause music</span><span class="sub">Look Up at the Morning Stars</span></span>
 </button>
 
 <div class="lightbox" id="lightbox" hidden>
@@ -435,7 +427,7 @@ footer{padding-bottom:96px}
   </div>
 </div>
 
-<footer>© 2026 Lu (Lily) Chen</footer>
+<footer>© 2026 Lily Chen</footer>
 </div>
 
 <script>
@@ -478,19 +470,25 @@ footer{padding-bottom:96px}
     // occasional meteor
     if(!reduce && t-last>next){
       const ang=(Math.PI/180)*(28+Math.random()*12);
-      meteors.push({x:W*(.35+Math.random()*.75),y:-20+Math.random()*H*.3,vx:-Math.cos(ang),vy:Math.sin(ang),sp:9+Math.random()*4,max:180+Math.random()*120,len:0,life:0});
-      last=t; next=7000+Math.random()*7000;
+      meteors.push({x:W*(.35+Math.random()*.75),y:-20+Math.random()*H*.3,vx:-Math.cos(ang),vy:Math.sin(ang),sp:3.5+Math.random()*1.6,max:180+Math.random()*120,len:0,life:0});
+      last=t; next=1000+Math.random()*4000;
     }
     meteors=meteors.filter(m=>m.life<1);
     for(const m of meteors){
-      m.x+=m.vx*m.sp; m.y+=m.vy*m.sp; m.len=Math.min(m.max,m.len+m.sp*1.6); m.life+=.012;
-      const fade=m.life<.1?m.life/.1:1-(m.life-.1)/.9;
+      m.x+=m.vx*m.sp; m.y+=m.vy*m.sp; m.len=Math.min(m.max,m.len+m.sp*1.6); m.life+=.002;
+      const fade=m.life<.05?m.life/.05:m.life>.8?(1-m.life)/.2:1
       const tx=m.x-m.vx*m.len, ty=m.y-m.vy*m.len;
-      const g=ctx.createLinearGradient(m.x,m.y,tx,ty);
-      g.addColorStop(0,`rgba(255,255,255,${fade})`); g.addColorStop(1,'rgba(255,255,255,0)');
-      ctx.strokeStyle=g; ctx.lineWidth=2.2; ctx.lineCap='round';
-      ctx.beginPath(); ctx.moveTo(m.x,m.y); ctx.lineTo(tx,ty); ctx.stroke();
-      ctx.globalAlpha=fade; ctx.beginPath(); ctx.arc(m.x,m.y,2.6,0,6.283); ctx.fill(); ctx.globalAlpha=1;
+      ctx.shadowColor='rgba(110,130,200,.55)'; ctx.shadowBlur=6;   // same glow as the stars
+      ctx.globalAlpha=fade;
+      const g=ctx.createLinearGradient(m.x,m.y,tx,ty);               // tail: white, fading to transparent
+      g.addColorStop(0,'rgba(255,255,255,1)'); g.addColorStop(1,'rgba(255,255,255,0)');
+      const nx=-m.vy, ny=m.vx, w=1;                                  // 2px wide, tapering to a point
+      ctx.fillStyle=g; ctx.beginPath();
+      ctx.moveTo(m.x+nx*w,m.y+ny*w); ctx.lineTo(tx,ty); ctx.lineTo(m.x-nx*w,m.y-ny*w);
+      ctx.closePath(); ctx.fill();
+      ctx.fillStyle='#FFFFFF'; ctx.beginPath(); ctx.arc(m.x,m.y,1.8,0,6.283); ctx.fill();   // head
+      ctx.globalAlpha=1;
+      
     }
     ctx.shadowBlur=0;
     sparks=sparks.filter(p=>p.life<1);
