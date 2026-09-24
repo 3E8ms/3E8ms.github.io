@@ -17,7 +17,7 @@ img{max-width:100%}
 <style>
 :root{
   --bg:#FFFFFF; --surface:#FAF8FC; --ink:#1E1A29; --muted:#6B6479; --line:#ECE7F1;
-  --accent:#D6336C; --accent-soft:#FFE8F0; --stage:#FFFFFF; --stage-line:#E7E1EE;
+  --accent:#D6336C; --accent-soft:#FFE8F0; --bar:rgba(255,255,255,.3); --bar-line:rgba(30,26,41,.06); --stage:#FFFFFF; --stage-line:#E7E1EE;
   --display:"Cormorant Garamond", "Garamond", "Times New Roman", serif;
   --body:"Source Serif 4", "Georgia", "Times New Roman", serif;
   --mono:"Source Serif 4", "Georgia", "Times New Roman", serif;
@@ -26,13 +26,13 @@ img{max-width:100%}
   :root:not([data-theme="light"]){
     color-scheme:dark;
     --bg:#14121A; --surface:#1C1924; --ink:#F1EDF6; --muted:#A59DB3; --line:#2D2838;
-    --accent:#FF7AA8; --accent-soft:#3A1F2B; --stage:#1D1A25; --stage-line:#322C3E;
+    --accent:#FF7AA8; --accent-soft:#3A1F2B; --bar:rgba(20,18,26,.3); --bar-line:rgba(255,255,255,.08); --stage:#1D1A25; --stage-line:#322C3E;
   }
 }
 :root[data-theme="dark"]{
   color-scheme:dark;
   --bg:#14121A; --surface:#1C1924; --ink:#F1EDF6; --muted:#A59DB3; --line:#2D2838;
-  --accent:#FF7AA8; --accent-soft:#3A1F2B; --stage:#1D1A25; --stage-line:#322C3E;
+  --accent:#FF7AA8; --accent-soft:#3A1F2B; --bar:rgba(20,18,26,.3); --bar-line:rgba(255,255,255,.08); --stage:#1D1A25; --stage-line:#322C3E;
 }
 *{box-sizing:border-box}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;padding-inline:20px;-webkit-font-smoothing:antialiased}
@@ -41,7 +41,9 @@ a{color:inherit}
 a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
 
 /* nav */
-nav{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-block:22px}
+.topbar{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;margin-inline:-20px;padding-inline:20px;background:var(--bar);-webkit-backdrop-filter:saturate(1.4) blur(14px);backdrop-filter:saturate(1.4) blur(14px);border-bottom:1px solid var(--bar-line)}
+nav{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-block:16px;max-width:1080px;margin:0 auto}
+section,header.hero,#photos{scroll-margin-top:90px}
 .mark{font-family:var(--display);font-weight:700;font-size:22px;letter-spacing:-.01em;text-decoration:none}
 .mark span{color:var(--accent)}
 nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0;flex-wrap:wrap}
@@ -173,7 +175,7 @@ footer{padding-bottom:96px}
 
 </head>
 <body>
-<div class="wrap">
+<div class="topbar">
   <nav>
     <a class="mark" href="#top">Lily Chen<span>.</span></a>
     <ul>
@@ -186,6 +188,9 @@ footer{padding-bottom:96px}
       <li><a href="#photos">Photos</a></li>
     </ul>
   </nav>
+  </div>
+<div class="wrap">
+
 
 <main id="home">
   <header class="hero" id="top">
