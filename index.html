@@ -1,0 +1,571 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Lu (Lily) Chen, software engineer in Ottawa.">
+<style>
+:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+<title>Lily Chen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&display=swap">
+<style>
+:root{
+  --bg:#FFFFFF; --surface:#FAF8FC; --ink:#1E1A29; --muted:#6B6479; --line:#ECE7F1;
+  --accent:#D6336C; --accent-soft:#FFE8F0; --stage:#FFFFFF; --stage-line:#E7E1EE;
+  --display:"Cormorant Garamond", "Garamond", "Times New Roman", serif;
+  --body:"Source Serif 4", "Georgia", "Times New Roman", serif;
+  --mono:"Source Serif 4", "Georgia", "Times New Roman", serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#14121A; --surface:#1C1924; --ink:#F1EDF6; --muted:#A59DB3; --line:#2D2838;
+    --accent:#FF7AA8; --accent-soft:#3A1F2B; --stage:#1D1A25; --stage-line:#322C3E;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#14121A; --surface:#1C1924; --ink:#F1EDF6; --muted:#A59DB3; --line:#2D2838;
+  --accent:#FF7AA8; --accent-soft:#3A1F2B; --stage:#1D1A25; --stage-line:#322C3E;
+}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);font-size:16px;line-height:1.6;padding-inline:20px;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1080px;margin:0 auto}
+a{color:inherit}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+
+/* nav */
+nav{display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap;padding-block:22px}
+.mark{font-family:var(--display);font-weight:700;font-size:22px;letter-spacing:-.01em;text-decoration:none}
+.mark span{color:var(--accent)}
+nav ul{display:flex;gap:22px;list-style:none;margin:0;padding:0;flex-wrap:wrap}
+nav ul a{text-decoration:none;color:var(--muted);font-size:14px;font-weight:500}
+nav ul a:hover{color:var(--ink)}
+
+/* hero */
+.hero{text-align:center;padding-block:40px 20px}
+.eyebrow{font-family:var(--mono);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0}
+h1{font-family:var(--display);font-weight:600;font-size:clamp(52px,9vw,104px);line-height:1;letter-spacing:-.02em;margin:14px 0 0;text-wrap:balance}
+h1 em{font-style:normal;color:var(--accent)}
+
+.stage-wrap{margin-top:36px}
+.stage{position:relative;border:1px solid var(--stage-line);border-radius:28px;background:var(--stage);overflow:hidden;max-width:100%}
+.stage svg{display:block;width:100%;height:auto}
+.stage-bar{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:12px;flex-wrap:wrap}
+.caption{font-family:var(--mono);font-size:12px;color:var(--muted);letter-spacing:.02em}
+.pause{font:500 12px var(--mono);color:var(--muted);background:transparent;border:1px solid var(--line);border-radius:999px;padding:6px 14px;cursor:pointer}
+.pause:hover{color:var(--ink);border-color:var(--muted)}
+
+/* sections */
+section{padding-block:64px 8px}
+.sec-head{display:grid;grid-template-columns:200px 1fr;gap:32px}
+.sec-label{font-family:var(--mono);font-size:12.5px;text-transform:uppercase;letter-spacing:.08em;color:var(--accent);padding-top:8px}
+h2{font-family:var(--display);font-weight:600;font-size:clamp(30px,4vw,42px);line-height:1.12;letter-spacing:-.01em;margin:0 0 18px;text-wrap:balance}
+.about p{max-width:62ch;margin:0 0 14px;color:var(--ink)}
+.about p.lede{font-size:19px;line-height:1.55}
+.facts{display:flex;flex-wrap:wrap;gap:10px 28px;margin-top:22px;padding:0;list-style:none}
+.facts li{font-size:14px;color:var(--muted)}
+.facts b{color:var(--ink);font-weight:600}
+
+/* experience */
+.jobs{list-style:none;margin:0;padding:0;display:grid}
+.job{display:grid;grid-template-columns:150px 1fr;gap:24px;padding-block:24px;border-top:1px solid var(--line)}
+.job:last-child,.job.edu{border-bottom:1px solid var(--line)}
+.job.edu .org{margin-bottom:0}
+.when{font-family:var(--mono);font-size:13px;color:var(--muted);font-variant-numeric:tabular-nums;padding-top:3px}
+.job h3{font-family:var(--display);font-weight:700;font-size:24px;letter-spacing:-.01em;margin:0;line-height:1.3}
+.job .org{color:var(--muted);font-size:14.5px;margin:2px 0 10px}
+.job ul{margin:0;padding-left:18px;max-width:64ch}
+.job li{margin-bottom:4px;font-size:15px}
+.job li::marker{color:var(--accent)}
+
+/* projects */
+.projects{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:0 40px}
+.proj{display:grid;gap:10px;align-content:start;padding-block:24px;border-top:1px solid var(--line)}
+.proj h3{font-family:var(--display);font-weight:700;font-size:24px;letter-spacing:-.01em;margin:0;line-height:1.2}
+.proj p{margin:0;font-size:15px;max-width:52ch}
+.proj .meta{font-family:var(--mono);font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.stack{display:flex;flex-wrap:wrap;gap:6px;list-style:none;margin:4px 0 0;padding:0}
+.stack li{font-size:13px;padding:3px 10px;border-radius:999px;background:var(--accent-soft);color:var(--ink)}
+@media (max-width:760px){.projects{grid-template-columns:1fr}}
+
+/* photos page */
+.title-link{text-decoration:none;background-image:linear-gradient(var(--accent),var(--accent));background-size:0 2px;background-position:0 100%;background-repeat:no-repeat;transition:background-size .3s}
+.title-link:hover{background-size:100% 2px;color:var(--accent)}
+.title-link span{display:inline-block;transition:transform .25s}
+.title-link:hover span{transform:translateX(4px)}
+#photos-link{padding-bottom:64px}
+.photos-page{padding-block:32px 72px;text-align:center}
+.photos-page .back{display:inline-block;margin-bottom:28px;color:var(--muted);text-decoration:none;font-size:15px}
+.photos-page .back:hover{color:var(--accent)}
+.photos-title{font-size:clamp(44px,7vw,84px);margin:12px 0 40px}
+.gallery{list-style:none;margin:0;padding:0;columns:3 260px;column-gap:14px;text-align:left}
+.gallery li{break-inside:avoid;margin-bottom:14px}
+#home[hidden],#photos[hidden]{display:none}
+.shot{display:block;width:100%;padding:0;border:0;background:none;cursor:zoom-in;border-radius:14px;overflow:hidden}
+.shot img{display:block;width:100%;height:auto;transition:transform .5s ease}
+.shot:hover img{transform:scale(1.03)}
+.lightbox{position:fixed;inset:0;z-index:60;background:rgba(20,18,26,.88);display:grid;place-items:center;padding:calc(24px + env(safe-area-inset-top,0px)) 16px calc(24px + env(safe-area-inset-bottom,0px));cursor:zoom-out}
+.lightbox[hidden]{display:none}
+.lightbox img{max-width:100%;max-height:100%;border-radius:10px;object-fit:contain}
+.lightbox .close{position:absolute;top:calc(14px + env(safe-area-inset-top,0px));right:16px;font:500 14px var(--body);color:#fff;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.4);border-radius:999px;padding:6px 14px;cursor:pointer}
+
+/* skills */
+.skills{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:28px}
+.skills h3{font-family:var(--mono);font-weight:500;font-size:12.5px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0 0 12px}
+.chips{display:flex;flex-wrap:wrap;gap:8px;list-style:none;margin:0;padding:0}
+.chips li{font-size:14px;padding:5px 12px;border-radius:999px;background:var(--surface);border:1px solid var(--line)}
+.chips li.hl{background:var(--accent-soft);border-color:transparent}
+
+/* contact */
+.contact{padding-block:64px 8px}
+.contact-card{display:grid;gap:14px}
+.row{display:flex;align-items:center;gap:14px;flex-wrap:wrap;padding-block:16px;border-top:1px solid var(--line)}
+.row:last-child{border-bottom:1px solid var(--line)}
+.row .k{font-family:var(--mono);font-size:12.5px;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);width:90px}
+.row .v{font-family:var(--display);font-weight:600;font-size:clamp(22px,2.8vw,28px);letter-spacing:-.01em;user-select:all;word-break:break-all}
+.row a.v{user-select:text;text-decoration:none;border-bottom:2px solid var(--accent-soft)}
+.row a.v:hover{border-color:var(--accent)}
+.copy{margin-left:auto;font:500 12px var(--mono);color:var(--ink);background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:6px 14px;cursor:pointer}
+.copy:hover{border-color:var(--muted)}
+footer{padding-block:0 40px;color:var(--muted);font-size:13px;font-family:var(--mono)}
+
+@media (max-width:760px){
+  .sec-head{grid-template-columns:1fr;gap:6px}
+  .job{grid-template-columns:1fr;gap:6px}
+  .skills{grid-template-columns:1fr}
+  .row .k{width:auto;min-width:70px}
+  nav ul{gap:14px}
+}
+
+.photo img{display:block;width:100%;height:auto}
+.placeholder{aspect-ratio:16/9;display:grid;place-items:center;border:1.5px dashed var(--stage-line);background:var(--surface)}
+.ph-inner{display:grid;justify-items:center;gap:10px;color:var(--muted);font-family:var(--mono);font-size:13px}
+
+.bgm{cursor:pointer;font-family:var(--body);position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom, 0px));z-index:10;display:flex;align-items:center;gap:10px;padding:10px 16px 10px 12px;border-radius:999px;background:var(--bg);border:1px solid var(--line);box-shadow:0 6px 24px rgba(30,26,41,.10);text-decoration:none;color:var(--ink);font-size:14px;font-weight:500}
+.bgm:hover{border-color:var(--accent)}
+.bgm .disc{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:#fff}
+.bgm .sub{display:block;font-family:var(--mono);font-size:11px;color:var(--muted);font-weight:400;line-height:1.2}
+.bgm .t{line-height:1.25}
+footer{padding-bottom:96px}
+.bgm.off .disc{background:var(--muted)}
+
+.intro{position:fixed;inset:0;z-index:50;background:linear-gradient(180deg,#C6E0F7 0%,#D8E7F8 30%,#EEE5F5 58%,#FBDDE8 82%,#FFEAF0 100%);color:#FFFFFF;overflow:hidden;display:grid;place-items:center;transition:opacity .9s ease,visibility .9s;padding-inline:16px;cursor:crosshair}
+.intro.gone{opacity:0;visibility:hidden}
+.intro canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
+.intro .clouds{position:absolute;left:-6%;bottom:-2px;width:112%;height:auto;z-index:1;animation:drift 22s ease-in-out infinite alternate}
+@keyframes drift{from{transform:translateX(-2%)}to{transform:translateX(2%)}}
+@media (prefers-reduced-motion:reduce){.intro .clouds{animation:none}}
+.intro-inner{position:relative;z-index:3;padding-bottom:8vh;display:grid;justify-items:center;gap:30px;text-align:center}
+.intro-eyebrow{margin:0;font-family:var(--display);font-weight:600;font-size:clamp(46px,8vw,84px);line-height:1;letter-spacing:-.02em;text-shadow:0 2px 16px rgba(84,92,160,.45),0 1px 3px rgba(84,92,160,.45);}
+.intro-sub{margin:0;font-family:var(--mono);font-size:15px;letter-spacing:.06em;color:#FFFFFF;text-shadow:0 2px 16px rgba(84,92,160,.45),0 1px 3px rgba(84,92,160,.45);}
+.enter{font:500 13px var(--mono);letter-spacing:.2em;text-transform:uppercase;color:#FFFFFF;text-shadow:0 2px 16px rgba(84,92,160,.45),0 1px 3px rgba(84,92,160,.45);background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.85);border-radius:999px;padding:12px 34px 12px 38px;cursor:pointer;transition:background .25s,border-color .25s}
+.enter:hover{background:rgba(255,255,255,.32);border-color:#FFFFFF}
+.enter:focus-visible{outline:2px solid #FFFFFF;outline-offset:4px}
+.intro-note{margin:0;font-family:var(--mono);font-size:13px;color:rgba(255,255,255,.92);letter-spacing:.04em;text-shadow:0 2px 16px rgba(84,92,160,.45),0 1px 3px rgba(84,92,160,.45);}
+</style>
+
+</head>
+<body>
+<div class="wrap">
+  <nav>
+    <a class="mark" href="#top">Lily Chen<span>.</span></a>
+    <ul>
+      <li><a href="#about">About</a></li>
+      <li><a href="#education">Education</a></li>
+      <li><a href="#experience">Experience</a></li>
+      <li><a href="#projects">Projects</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#contact">Contact</a></li>
+      <li><a href="#photos">Photos</a></li>
+    </ul>
+  </nav>
+
+<main id="home">
+  <header class="hero" id="top">
+    <p class="eyebrow">Software Engineer · Ottawa, Canada</p>
+    <h1>Lu (Lily) Chen<em>.</em></h1>
+    <div class="stage-wrap">
+      <div class="stage photo">
+        <img src="hero.jpg" width="1242" height="696" alt="Lily holding her white cat">
+      </div>
+    </div>
+  </header>
+
+  <section id="about" class="about">
+    <div class="sec-head">
+      <div class="sec-label">About</div>
+      <div>
+        <h2>I build dependable software, from CLI interfaces to web front ends.</h2>
+        <p class="lede">I'm Lily, a software engineer based in Ottawa. I spent four and a half years at Ciena working on REST APIs, C/C++ command-line interfaces, and Python plugins for network resource services.</p>
+        <p>Before Ciena I worked at a Palo Alto startup, on BlackBerry's QNX Software Center, and on data tooling for the Ontario Ministry of Education. I care about clear interfaces, good test coverage, and finding the root cause of a defect instead of patching around it. I've also mentored co-op students along the way.</p>
+        <p>Outside work I build small full-stack projects: a daily task dashboard, a to-do app my friends use, and an image-posting site.</p>
+        <ul class="facts">
+          <li><b>Based in</b> Ottawa, ON</li>
+          <li><b>Focus</b> Systems, APIs, full-stack development</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="education">
+    <div class="sec-head">
+      <div class="sec-label">Education</div>
+      <div>
+        <h2>University of Waterloo</h2>
+        <div class="job edu">
+          <div class="when">Sep 2015 – Aug 2020</div>
+          <div>
+            <h3>Bachelor of Mathematics, Honours Computer Science</h3>
+            <p class="org">Waterloo, Ontario, Canada</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="experience">
+    <div class="sec-head">
+      <div class="sec-label">Experience</div>
+      <div>
+        <h2>Where I've worked</h2>
+        <ol class="jobs">
+          <li class="job">
+            <div class="when">Jan 2021 – Jun 2025</div>
+            <div>
+              <h3>Software Engineer</h3>
+              <p class="org">Ciena · Ottawa</p>
+              <ul>
+                <li>Designed and built REST APIs for Resource Adapter services, returning structured JSON.</li>
+                <li>Implemented and maintained YAML data serialization between internal and external systems with Python plugins.</li>
+                <li>Structured and maintained C/C++ CLI interfaces, improving usability for operators.</li>
+                <li>Resolved JIRA issues across service teams, supporting NBI, CLI, SNMP and OpenConfig integrations.</li>
+                <li>Increased unit test coverage for new features and legacy code with the internal tool DARTH.</li>
+                <li>Triaged defects through log and root-cause analysis, reproducing issues across the lifecycle to ship reliable releases.</li>
+                <li>Mentored co-op students through onboarding, environment setup and troubleshooting.</li>
+              </ul>
+            </div>
+          </li>
+          <li class="job">
+            <div class="when">Jan 2020 – Apr 2020</div>
+            <div>
+              <h3>Software Engineer</h3>
+              <p class="org">'nuffsaid · Palo Alto</p>
+              <ul>
+                <li>Contributed to the core product across the full development cycle at an early-stage startup.</li>
+                <li>Improved User Model scalability and added admin authentication with Okta.</li>
+                <li>Built a Waitlist feature in Python and TypeScript that sent newsletters and reconnected the company with 500 potential users.</li>
+              </ul>
+            </div>
+          </li>
+          <li class="job">
+            <div class="when">Jan 2019 – Apr 2019</div>
+            <div>
+              <h3>Software Engineer</h3>
+              <p class="org">BlackBerry QNX · Ottawa</p>
+              <ul>
+                <li>Contributed to the web version of the QNX Software Center, which supports admin-client communication.</li>
+                <li>Redesigned and implemented the System Update page in Java and TypeScript.</li>
+                <li>Added full unit test coverage with Chai/Mocha and JUnit.</li>
+              </ul>
+            </div>
+          </li>
+          <li class="job">
+            <div class="when">Jan 2017 – Aug 2017</div>
+            <div>
+              <h3>Quality Assurance</h3>
+              <p class="org">Ontario Ministry of Education · Toronto</p>
+              <ul>
+                <li>Built VBA data aggregation tools that parse PDF and CSV files.</li>
+                <li>Developed new features and optimized the performance of the data processing system.</li>
+                <li>Improved the testing framework and database with VBA and PL/SQL Developer.</li>
+              </ul>
+            </div>
+          </li>
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <div class="sec-head">
+      <div class="sec-label">Projects</div>
+      <div>
+        <h2>Things I've built</h2>
+        <ul class="projects">
+          <li class="proj">
+            <span class="meta">Web · 2026</span>
+            <h3>This website</h3>
+            <p>My personal site, with a dawn-sky welcome screen, twinkling stars you can click to light up, occasional meteors, and background music.</p>
+            <ul class="stack" aria-label="Tech stack"><li>HTML</li><li>CSS</li><li>JavaScript</li><li>Canvas 2D</li><li>SVG</li><li>HTML5 Audio</li></ul>
+          </li>
+          <li class="proj">
+            <span class="meta">Productivity tool</span>
+            <h3>Daily task dashboard</h3>
+            <p>A personal dashboard for planning and tracking what I need to get done each day.</p>
+            <ul class="stack" aria-label="Tech stack"><li>TypeScript</li><li>Python</li></ul>
+          </li>
+          <li class="proj">
+            <span class="meta">Full-stack app</span>
+            <h3>Shared to-do list</h3>
+            <p>A to-do list app that my friends and I use together to keep track of shared tasks.</p>
+            <ul class="stack" aria-label="Tech stack"><li>Node.js</li><li>JavaScript</li><li>HTML</li><li>CSS</li></ul>
+          </li>
+          <li class="proj">
+            <span class="meta">Full-stack app</span>
+            <h3>Image-posting site</h3>
+            <p>A website where people can upload and share images.</p>
+            <ul class="stack" aria-label="Tech stack"><li>Node.js</li><li>JavaScript</li><li>HTML</li><li>CSS</li></ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="skills">
+    <div class="sec-head">
+      <div class="sec-label">Skills</div>
+      <div>
+        <h2>Tools I reach for</h2>
+        <div class="skills">
+          <div>
+            <h3>Programming</h3>
+            <ul class="chips">
+              <li class="hl">Python</li><li class="hl">C++</li><li class="hl">C</li><li>Java</li><li>JavaScript</li><li>VB</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Development</h3>
+            <ul class="chips">
+              <li class="hl">Linux</li><li>Git</li><li>Node.js</li><li>Windows</li><li>Batch</li><li>VBA</li><li>JUnit</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Front end</h3>
+            <ul class="chips">
+              <li class="hl">TypeScript</li><li class="hl">React</li><li>HTML</li><li>CSS</li><li>Mocha</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="contact" class="contact">
+    <div class="sec-head">
+      <div class="sec-label">Contact</div>
+      <div>
+        <h2>Say hello</h2>
+        <div class="contact-card">
+          <div>
+            <div class="row">
+              <span class="k">Email</span>
+              <a class="v" id="email" href="mailto:lilyelmure@hotmail.com">lilyelmure@hotmail.com</a>
+              <button class="copy" id="copy" type="button">Copy</button>
+            </div>
+            <div class="row">
+              <span class="k">Website</span>
+              <a class="v" href="https://3e8ms.github.io/" target="_blank" rel="noopener">3e8ms.github.io</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="photos-link">
+    <div class="sec-head">
+      <div class="sec-label">Photos</div>
+      <div>
+        <h2><a class="title-link" href="#photos">Moments of My Life</a></h2>
+      </div>
+    </div>
+  </section>
+</main>
+
+<main id="photos" class="photos-page" hidden>
+  <a class="back" href="#top">← Back to home</a>
+  <p class="eyebrow">Photos</p>
+  <h1 class="photos-title">Moments of My Life</h1>
+  <ul class="gallery">
+      <li><button class="shot" type="button" data-src="moments/m01.jpg" aria-label="View larger: The sun rising over a sea of clouds, seen from a plane"><img src="moments/m01.jpg" width="1400" height="1050" alt="The sun rising over a sea of clouds, seen from a plane" loading="lazy"></button></li>
+      <li><button class="shot" type="button" data-src="moments/m02.jpg" aria-label="View larger: Hot air balloons drifting over farmland at sunrise"><img src="moments/m02.jpg" width="1400" height="1050" alt="Hot air balloons drifting over farmland at sunrise" loading="lazy"></button></li>
+      <li><button class="shot" type="button" data-src="moments/m03.jpg" aria-label="View larger: Sunlight streaming down a castle street as a dragon breathes fire overhead"><img src="moments/m03.jpg" width="1400" height="1050" alt="Sunlight streaming down a castle street as a dragon breathes fire overhead" loading="lazy"></button></li>
+      <li><button class="shot" type="button" data-src="moments/m04.jpg" aria-label="View larger: An impressionist painting of a hazy sunset over a river, in a gilded frame"><img src="moments/m04.jpg" width="1400" height="1400" alt="An impressionist painting of a hazy sunset over a river, in a gilded frame" loading="lazy"></button></li>
+      <li><button class="shot" type="button" data-src="moments/m05.jpg" aria-label="View larger: An instant photo portrait, smiling on a sofa"><img src="moments/m05.jpg" width="1280" height="1280" alt="An instant photo portrait, smiling on a sofa" loading="lazy"></button></li>
+      <li><button class="shot" type="button" data-src="moments/m06.jpg" aria-label="View larger: A small Christmas tree glowing by a window"><img src="moments/m06.jpg" width="787" height="1400" alt="A small Christmas tree glowing by a window" loading="lazy"></button></li>
+      <li><button class="shot" type="button" data-src="moments/m07.jpg" aria-label="View larger: My white cat lying upside down on the bed"><img src="moments/m07.jpg" width="1400" height="933" alt="My white cat lying upside down on the bed" loading="lazy"></button></li>
+      <li><button class="shot" type="button" data-src="moments/m08.jpg" aria-label="View larger: Hand-drawn manga pages"><img src="moments/m08.jpg" width="640" height="854" alt="Hand-drawn manga pages" loading="lazy"></button></li>
+      <li><button class="shot" type="button" data-src="moments/m09.jpg" aria-label="View larger: A snowy peak above golden autumn larches"><img src="moments/m09.jpg" width="1400" height="1050" alt="A snowy peak above golden autumn larches" loading="lazy"></button></li>
+      <li><button class="shot" type="button" data-src="moments/m10.jpg" aria-label="View larger: A snow-covered valley with mist rolling over the mountains"><img src="moments/m10.jpg" width="1400" height="933" alt="A snow-covered valley with mist rolling over the mountains" loading="lazy"></button></li>
+    </ul>
+</main>
+
+  <audio id="bgm" src="bgm.mp3" loop preload="auto"></audio>
+<button class="bgm" id="bgmBtn" type="button" aria-pressed="false" hidden>
+  <span class="disc" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>
+  <span class="t"><span id="bgmLabel">Pause music</span><span class="sub">Look Up at the Evening Stars</span></span>
+</button>
+
+<div class="lightbox" id="lightbox" hidden>
+  <button class="close" id="lbClose" type="button">Close</button>
+  <img id="lbImg" alt="">
+</div>
+
+<div class="intro" id="intro">
+  <svg class="clouds" viewBox="0 0 1400 260" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+    <path fill="#FFFFFF" d="M0 170C40 120 110 110 160 140C190 80 290 70 330 125C370 90 440 95 470 135C510 70 620 60 660 120C700 85 780 90 810 130C850 75 960 70 1000 125C1040 95 1110 95 1140 135C1180 90 1270 90 1310 130C1340 110 1380 115 1400 130L1400 260L0 260Z"/>
+  </svg>
+  <canvas id="sky" aria-hidden="true"></canvas>
+  <div class="intro-inner">
+    <p class="intro-eyebrow">Lu (Lily) Chen</p>
+    <button class="enter" id="enter" type="button">Enter</button>
+    <p class="intro-note" id="introNote">Music plays when you enter</p>
+  </div>
+</div>
+
+<footer>© 2026 Lu (Lily) Chen</footer>
+</div>
+
+<script>
+(function(){
+  /* ---------- intro sky ---------- */
+  const intro=document.getElementById('intro'), cv=document.getElementById('sky'), ctx=cv.getContext('2d');
+  const reduce=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.documentElement.style.overflow='hidden';
+  let W,H,dpr,stars=[],meteors=[],raf,last=0,next=3500;
+  function size(){
+    dpr=Math.min(window.devicePixelRatio||1,2); W=cv.clientWidth; H=cv.clientHeight;
+    cv.width=W*dpr; cv.height=H*dpr; ctx.setTransform(dpr,0,0,dpr,0,0);
+    stars=Array.from({length:Math.round(W*H/15000)},(_,i)=>({x:Math.random()*W,y:Math.random()*H*.7,big:i%6===0,r:i%6===0?5+Math.random()*3:1+Math.random()*1.4,p:Math.random()*6.28,s:.6+Math.random()*1.6}));
+  }
+  let sparks=[];
+  function sparkle(x,y,r,rot){
+    ctx.save(); ctx.translate(x,y); ctx.rotate(rot);
+    ctx.beginPath(); ctx.moveTo(0,-r); ctx.quadraticCurveTo(0,0,r,0); ctx.quadraticCurveTo(0,0,0,r); ctx.quadraticCurveTo(0,0,-r,0); ctx.quadraticCurveTo(0,0,0,-r);
+    ctx.fill(); ctx.restore();
+  }
+  // a burst of twinkling stars at the click point
+  function burst(x,y){
+    sparks.push({x,y,r:16,life:0,rot:Math.random()*.4,main:true});
+    const n=5+Math.floor(Math.random()*3);
+    for(let i=0;i<n;i++){
+      const a=Math.random()*6.283, d=18+Math.random()*46;
+      sparks.push({x:x+Math.cos(a)*d,y:y+Math.sin(a)*d,r:3+Math.random()*6,life:-Math.random()*.35,rot:Math.random()*.6,main:false});
+    }
+  }
+  function draw(t){
+    ctx.clearRect(0,0,W,H);
+    ctx.shadowColor='rgba(110,130,200,.55)'; ctx.shadowBlur=6; ctx.fillStyle='#FFFFFF';
+    for(const s of stars){
+      const k=reduce?1:Math.abs(Math.sin(t/1000*s.s+s.p));
+      ctx.globalAlpha=.55+.45*k;
+      if(s.big) sparkle(s.x,s.y,s.r*(.7+.3*k),0);
+      else {ctx.beginPath(); ctx.arc(s.x,s.y,s.r,0,6.283); ctx.fill();}
+    }
+    ctx.globalAlpha=1;
+    // occasional meteor
+    if(!reduce && t-last>next){
+      const ang=(Math.PI/180)*(28+Math.random()*12);
+      meteors.push({x:W*(.35+Math.random()*.75),y:-20+Math.random()*H*.3,vx:-Math.cos(ang),vy:Math.sin(ang),sp:9+Math.random()*4,max:180+Math.random()*120,len:0,life:0});
+      last=t; next=7000+Math.random()*7000;
+    }
+    meteors=meteors.filter(m=>m.life<1);
+    for(const m of meteors){
+      m.x+=m.vx*m.sp; m.y+=m.vy*m.sp; m.len=Math.min(m.max,m.len+m.sp*1.6); m.life+=.012;
+      const fade=m.life<.1?m.life/.1:1-(m.life-.1)/.9;
+      const tx=m.x-m.vx*m.len, ty=m.y-m.vy*m.len;
+      const g=ctx.createLinearGradient(m.x,m.y,tx,ty);
+      g.addColorStop(0,`rgba(255,255,255,${fade})`); g.addColorStop(1,'rgba(255,255,255,0)');
+      ctx.strokeStyle=g; ctx.lineWidth=2.2; ctx.lineCap='round';
+      ctx.beginPath(); ctx.moveTo(m.x,m.y); ctx.lineTo(tx,ty); ctx.stroke();
+      ctx.globalAlpha=fade; ctx.beginPath(); ctx.arc(m.x,m.y,2.6,0,6.283); ctx.fill(); ctx.globalAlpha=1;
+    }
+    ctx.shadowBlur=0;
+    sparks=sparks.filter(p=>p.life<1);
+    for(const p of sparks){
+      p.life+=reduce?.03:.018;
+      if(p.life<0) continue;
+      // grow fast, twinkle, then fade
+      const k=p.life<.25?p.life/.25:1, fade=p.life<.5?1:1-(p.life-.5)/.5;
+      const tw=reduce?1:.8+.2*Math.sin(p.life*30);
+      const r=p.r*(.3+.7*k)*tw;
+      const glow=ctx.createRadialGradient(p.x,p.y,0,p.x,p.y,r*2.2);
+      glow.addColorStop(0,`rgba(255,255,255,${.7*fade})`); glow.addColorStop(.5,`rgba(255,214,232,${.35*fade})`); glow.addColorStop(1,'rgba(255,214,232,0)');
+      ctx.globalAlpha=1; ctx.fillStyle=glow; ctx.beginPath(); ctx.arc(p.x,p.y,r*2.2,0,6.283); ctx.fill();
+      ctx.globalAlpha=fade; ctx.fillStyle='#FFFFFF';
+      sparkle(p.x,p.y,r,p.rot+(reduce?0:p.life*.6));
+    }
+    ctx.globalAlpha=1;
+    raf=requestAnimationFrame(draw);
+  }
+  size(); window.addEventListener('resize',size); raf=requestAnimationFrame(draw);
+  last=-(next-1500);
+  intro.addEventListener('pointerdown',e=>{
+    if(e.target.closest('.enter')) return;
+    const r=cv.getBoundingClientRect();
+    burst(e.clientX-r.left,e.clientY-r.top);
+  });
+
+  /* ---------- music + enter ---------- */
+  const audio=document.getElementById('bgm'), bBtn=document.getElementById('bgmBtn'), bLabel=document.getElementById('bgmLabel');
+  let audioOk=true;
+  audio.addEventListener("error",()=>{audioOk=false; bBtn.hidden=true; document.getElementById("introNote").hidden=true});
+  function setPlaying(on){bBtn.classList.toggle('off',!on); bLabel.textContent=on?'Pause music':'Play music'; bBtn.setAttribute('aria-pressed',String(on));}
+  function fadeIn(){audio.volume=0; let v=0; const id=setInterval(()=>{v=Math.min(.02,v+.001); audio.volume=v; if(v>=.02) clearInterval(id)},120);}
+  document.getElementById('enter').addEventListener('click',()=>{
+    if(audioOk){
+      const p=audio.play();
+      if(p&&p.then) p.then(()=>{fadeIn(); bBtn.hidden=false; setPlaying(true)},()=>{bBtn.hidden=!audioOk; setPlaying(false)});
+    }
+    intro.classList.add('gone');
+    document.documentElement.style.overflow='';
+    setTimeout(()=>cancelAnimationFrame(raf),900);
+  });
+  bBtn.addEventListener('click',()=>{
+    if(audio.paused){audio.play().then(()=>setPlaying(true),()=>{})} else {audio.pause(); setPlaying(false)}
+  });
+
+  /* ---------- simple page routing (#photos) ---------- */
+  const homeEl=document.getElementById('home'), photosEl=document.getElementById('photos');
+  function route(){
+    const onPhotos=location.hash==='#photos';
+    homeEl.hidden=onPhotos; photosEl.hidden=!onPhotos;
+    if(onPhotos){ window.scrollTo(0,0); document.title='Moments of My Life · Lily Chen'; }
+    else {
+      document.title='Lily Chen';
+      const t=location.hash&&document.getElementById(location.hash.slice(1));
+      if(t) t.scrollIntoView(); else window.scrollTo(0,0);
+    }
+  }
+  window.addEventListener('hashchange',route); route();
+
+  /* ---------- gallery lightbox ---------- */
+  const lb=document.getElementById('lightbox'), lbImg=document.getElementById('lbImg');
+  let lastShot=null;
+  document.querySelectorAll('.shot').forEach(b=>b.addEventListener('click',()=>{
+    lastShot=b; const im=b.querySelector('img'); lbImg.src=b.dataset.src; lbImg.alt=im.alt;
+    lb.hidden=false; document.documentElement.style.overflow='hidden'; document.getElementById('lbClose').focus();
+  }));
+  function closeLb(){lb.hidden=true; document.documentElement.style.overflow=''; if(lastShot) lastShot.focus();}
+  lb.addEventListener('click',closeLb);
+  document.addEventListener('keydown',e=>{if(e.key==='Escape'&&!lb.hidden) closeLb();});
+
+  /* ---------- copy email ---------- */
+  const copy=document.getElementById('copy'), email=document.getElementById('email');
+  copy.addEventListener('click',()=>{
+    const done=()=>{copy.textContent='Copied';setTimeout(()=>copy.textContent='Copy',1600)};
+    const fallback=()=>{const r=document.createRange();r.selectNodeContents(email);const s=getSelection();s.removeAllRanges();s.addRange(r);copy.textContent='Selected';setTimeout(()=>copy.textContent='Copy',1600)};
+    try{navigator.clipboard.writeText(email.textContent).then(done,fallback)}catch(e){fallback()}
+  });
+})();
+</script>
+
+</body>
+</html>
