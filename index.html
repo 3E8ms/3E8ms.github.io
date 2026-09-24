@@ -157,13 +157,13 @@ footer{padding-block:0 40px;color:var(--muted);font-size:13px;font-family:var(--
 footer{padding-bottom:96px}
 .bgm.off .disc{background:var(--muted)}
 
-.intro{position:fixed;inset:0;z-index:50;background:linear-gradient(180deg,#C6E0F7 0%,#D8E7F8 30%,#EEE5F5 58%,#FBDDE8 82%,#FFEAF0 100%);color:#FFFFFF;overflow:hidden;display:grid;place-items:center;transition:opacity .9s ease,visibility .9s;padding-inline:16px;cursor:crosshair}
+.intro{position:fixed;inset:0;z-index:50;background:linear-gradient(180deg,#C6E0F7 0%,#D8E7F8 30%,#EEE5F5 58%,#FBDDE8 82%,#FFEAF0 100%);color:#FFFFFF;overflow:hidden;display:grid;place-items:center;transition:opacity .9s ease,visibility .9s;padding-inline:16px;cursor:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cdefs%3E%3Cfilter id='g' x='-50%25' y='-50%25' width='200%25' height='200%25'%3E%3CfeGaussianBlur stdDeviation='1.8'/%3E%3C/filter%3E%3C/defs%3E%3Cpath d='M5 3L5 23L10 18.2L13.6 26.4L16.8 25L13.2 17L20 17Z' fill='rgb(110,130,200)' fill-opacity='.75' filter='url(%23g)'/%3E%3Cpath d='M5 3L5 23L10 18.2L13.6 26.4L16.8 25L13.2 17L20 17Z' fill='white' stroke-linejoin='round'/%3E%3C/svg%3E") 5 3, auto; }
 .intro.gone{opacity:0;visibility:hidden}
 .intro canvas{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:2}
 .intro .clouds{position:absolute;left:-6%;bottom:-2px;width:112%;height:auto;z-index:3;animation:drift 22s ease-in-out infinite alternate}
 @keyframes drift{from{transform:translateX(-2%)}to{transform:translateX(2%)}}
 @media (prefers-reduced-motion:reduce){.intro .clouds{animation:none}}
-.intro-inner{position:relative;z-index:3;padding-bottom:8vh;display:grid;justify-items:center;gap:30px;text-align:center}
+.intro-inner{position:relative;z-index:4;padding-bottom:8vh;display:grid;justify-items:center;gap:30px;text-align:center}
 .intro-eyebrow{margin:0;font-family:var(--display);font-weight:600;font-size:clamp(46px,8vw,84px);line-height:1;letter-spacing:-.02em;text-shadow:0 2px 16px rgba(84,92,160,.45),0 1px 3px rgba(84,92,160,.45);}
 .intro-sub{margin:0;font-family:var(--mono);font-size:15px;letter-spacing:.06em;color:#FFFFFF;text-shadow:0 2px 16px rgba(84,92,160,.45),0 1px 3px rgba(84,92,160,.45);}
 .enter{font:500 13px var(--mono);letter-spacing:.2em;text-transform:uppercase;color:#FFFFFF;text-shadow:0 2px 16px rgba(84,92,160,.45),0 1px 3px rgba(84,92,160,.45);background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.85);border-radius:999px;padding:12px 34px 12px 38px;cursor:pointer;transition:background .25s,border-color .25s}
@@ -421,7 +421,7 @@ footer{padding-bottom:96px}
   </svg>
   <canvas id="sky" aria-hidden="true"></canvas>
   <div class="intro-inner">
-    <p class="intro-eyebrow">Lu (Lily) Chen</p>
+    <p class="intro-eyebrow">Lily Chen</p>
     <button class="enter" id="enter" type="button">Enter</button>
     <p class="intro-note" id="introNote">Music plays when you enter</p>
   </div>
@@ -471,11 +471,11 @@ footer{padding-bottom:96px}
     if(!reduce && t-last>next){
       const ang=(Math.PI/180)*(28+Math.random()*12);
       meteors.push({x:W*(.35+Math.random()*.75),y:-20+Math.random()*H*.3,vx:-Math.cos(ang),vy:Math.sin(ang),sp:3.5+Math.random()*1.6,max:180+Math.random()*120,len:0,life:0});
-      last=t; next=1000+Math.random()*4000;
+      last=t; next=1000+Math.random()*2000;
     }
     meteors=meteors.filter(m=>m.life<1);
     for(const m of meteors){
-      m.x+=m.vx*m.sp; m.y+=m.vy*m.sp; m.len=Math.min(m.max,m.len+m.sp*1.6); m.life+=.002;
+      m.x+=m.vx*m.sp; m.y+=m.vy*m.sp; m.len=Math.min(m.max,m.len+m.sp*1.6); m.life+=.0002;
       const fade=m.life<.05?m.life/.05:m.life>.8?(1-m.life)/.2:1
       const tx=m.x-m.vx*m.len, ty=m.y-m.vy*m.len;
       ctx.shadowColor='rgba(110,130,200,.55)'; ctx.shadowBlur=6;   // same glow as the stars
