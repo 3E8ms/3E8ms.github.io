@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Moments of My Life: photos by Lu (Lily) Chen.">
+<title>Moments of My Life · Lily Chen</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,500&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400&display=swap">
+<style>
+:root{
+  --bg:#FFFFFF; --surface:#FAF8FC; --ink:#1E1A29; --muted:#6B6479; --line:#ECE7F1;
+  --accent:#D6336C; --accent-soft:#FFE8F0; --stage:#FFFFFF; --stage-line:#E7E1EE;
+  --display:"Cormorant Garamond", "Garamond", "Times New Roman", serif;
+  --body:"Source Serif 4", "Georgia", "Times New Roman", serif;
+  --mono:"Source Serif 4", "Georgia", "Times New Roman", serif;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    color-scheme:dark;
+    --bg:#14121A; --surface:#1C1924; --ink:#F1EDF6; --muted:#A59DB3; --line:#2D2838;
+    --accent:#FF7AA8; --accent-soft:#3A1F2B; --stage:#1D1A25; --stage-line:#322C3E;
+  }
+}
+:root[data-theme="dark"]{
+  color-scheme:dark;
+  --bg:#14121A; --surface:#1C1924; --ink:#F1EDF6; --muted:#A59DB3; --line:#2D2838;
+  --accent:#FF7AA8; --accent-soft:#3A1F2B; --stage:#1D1A25; --stage-line:#322C3E;
+}
+*{box-sizing:border-box}
+html,body{margin:0;height:100%;overflow:hidden;background:var(--bg)}
+[hidden]{display:none!important}
+.pv-row{position:absolute;inset:0;z-index:2;pointer-events:none}
+.pv-item{position:absolute;display:block;padding:0;border:0;overflow:hidden;background:var(--surface);pointer-events:auto;cursor:pointer;
+  transition:left .9s cubic-bezier(.2,.7,.2,1),top .9s cubic-bezier(.2,.7,.2,1),width .9s cubic-bezier(.2,.7,.2,1),height .9s cubic-bezier(.2,.7,.2,1),opacity .6s ease}
+.pv-item img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;display:block}
+.pv-item.is-main{cursor:e-resize}
+.pv-item.is-hidden{pointer-events:none}
+.pv-row.no-anim .pv-item{transition:none}
+@media (prefers-reduced-motion:reduce){.pv-item{transition:opacity .2s}}
+/* ---------- photo viewer (one photo at a time, scroll to move) ---------- */
+.pv{text-align:left;position:fixed;inset:0;z-index:30;background:var(--bg);color:var(--ink);font-family:var(--body);font-size:12.5px;line-height:1.5;overflow:hidden;overscroll-behavior:contain;touch-action:pan-x pinch-zoom}
+.pv p{margin:0}
+.pv button{font:inherit;color:inherit;background:none;border:0;padding:0;cursor:pointer}
+.pv-rule{position:absolute;top:0;bottom:0;left:50%;width:1px;background:var(--line);z-index:1}
+.pv-cats{position:absolute;top:32px;left:36px;z-index:3;list-style:none;margin:0;padding:0;display:grid;gap:2px}
+.pv-cats button{display:grid;grid-template-columns:88px 2ch;gap:8px;text-align:left;color:var(--muted);font-variant-numeric:tabular-nums}
+.pv-cats button span:last-child{text-align:right}
+.pv-cats button:hover,.pv-cats button[aria-pressed="true"]{color:var(--ink)}
+.pv-cats button[aria-pressed="true"]{font-weight:600}
+.pv-meta{position:absolute;top:32px;left:calc(50% + 36px);right:36px;z-index:3}
+.pv-title{font-weight:600}
+.pv-sub{color:var(--muted)}
+.pv-count{font-variant-numeric:tabular-nums;margin-left:6px}
+.pv-name{position:absolute;left:36px;top:50%;transform:translateY(-50%);z-index:1;font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink);pointer-events:none;transition:color .35s ease,text-shadow .35s ease}
+.pv-name-w{position:absolute;margin:0;white-space:nowrap;pointer-events:none;font-family:var(--display);font-weight:700;font-size:14px;letter-spacing:.08em;text-transform:uppercase;color:#fff;text-shadow:0 1px 6px rgba(0,0,0,.35);line-height:1.5}
+@media (max-width:760px){.pv-name-w{display:none}}
+.pv-stage{position:absolute;inset:0;z-index:2;display:grid;place-items:center;cursor:e-resize!important}
+.pv-stage img{grid-area:1/1;max-width:min(64vw,1100px);max-height:64vh;width:auto;height:auto;object-fit:contain;transition:opacity .7s ease,transform .9s cubic-bezier(.2,.7,.2,1)}
+.pv-stage img.out{opacity:0}
+.pv-thumbs{position:absolute;right:36px;top:50%;transform:translateY(-50%);z-index:2;display:grid;gap:10px;justify-items:end;pointer-events:none}
+.pv-thumbs img{display:block;height:11vh;width:auto;max-width:14vw;object-fit:cover;opacity:0}
+.pv-foot{position:absolute;left:36px;bottom:32px;z-index:3;display:grid;gap:10px}
+.pv-home{font-family:var(--display);font-weight:600;font-size:26px;line-height:1;letter-spacing:-.01em;color:var(--ink);text-decoration:none;justify-self:start;transition:color .2s}
+.pv-home:hover{color:var(--accent)}
+.pv-nav{display:flex;gap:18px}
+.pv-nav button{color:var(--muted)}
+.pv-nav button:hover{color:var(--ink)}
+.pv-nav button:disabled{opacity:.35;cursor:default}
+.pv-next{position:absolute;left:calc(50% + 36px);bottom:28px;z-index:3;font-size:22px!important;line-height:1;color:var(--ink)!important;transition:transform .25s}
+.pv-next:hover{transform:translateX(6px)}
+.pv :focus-visible{outline:1px solid var(--accent);outline-offset:4px}
+html.viewing,html.viewing body{overflow:hidden}
+html.viewing .bgm{z-index:40}
+@media (max-width:760px){
+  .pv-cats{top:20px;left:16px}
+  .pv-meta{top:20px;left:calc(50% + 14px);right:16px}
+  .pv-name{left:16px;top:auto;bottom:96px;transform:none}
+  .pv-stage img{max-width:88vw;max-height:56vh}
+  .pv-thumbs{right:16px;gap:8px}
+  .pv-thumbs img{height:8vh;max-width:22vw}
+  .pv-foot{left:16px;bottom:20px}
+  .pv-next{display:none}
+}
+@media (prefers-reduced-motion:reduce){.pv-stage img{transition:opacity .2s}.pv-thumbs{display:none}}
+
+/* ---------- background music ---------- */
+.bgm{cursor:pointer;font-family:var(--body);position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom, 0px));z-index:40;display:flex;align-items:center;gap:10px;padding:10px 16px 10px 12px;border-radius:999px;background:var(--bg);border:1px solid var(--line);box-shadow:0 6px 24px rgba(30,26,41,.10);color:var(--ink);font-size:14px;font-weight:500;text-align:left}
+.bgm:hover{border-color:var(--accent)}
+.bgm .disc{width:28px;height:28px;border-radius:50%;display:grid;place-items:center;background:var(--accent);color:#fff}
+.bgm.off .disc{background:var(--muted)}
+.bgm .t{line-height:1.25}
+.bgm .sub{display:block;font-size:11px;color:var(--muted);font-weight:400;line-height:1.2}
+</style>
+</head>
+<body>
+<main id="photos" class="photos-page">
+  <div class="pv" id="pv" aria-roledescription="carousel" aria-label="Moments of My Life">
+    <span class="pv-rule" aria-hidden="true"></span>
+
+    <ul class="pv-cats" id="pvCats" aria-label="Filter photos"></ul>
+
+    <div class="pv-meta" aria-live="polite">
+      <p class="pv-title" id="pvTitle"></p>
+      <p class="pv-sub"><span id="pvCat"></span> <span class="pv-count" id="pvCount"></span></p>
+    </div>
+
+    <p class="pv-name" id="pvName" aria-hidden="true">Moments of My Life</p>
+
+    <div class="pv-row" id="pvRow"></div>
+
+    <div class="pv-foot">
+      <a class="pv-home" href="index.html#top">Home</a>
+      <div class="pv-nav">
+        <button type="button" id="pvOlder">Older</button>
+        <button type="button" id="pvNewer">Newer</button>
+      </div>
+    </div>
+
+    <button class="pv-next" id="pvNext" type="button" aria-label="Next photo">&#10230;</button>
+  </div>
+</main>
+
+<audio id="bgm" src="retro-loop.mp3" loop preload="auto"></audio>
+<button class="bgm off" id="bgmBtn" type="button" aria-pressed="false">
+  <span class="disc" aria-hidden="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18V5l12-2v13"/><circle cx="6" cy="18" r="3"/><circle cx="18" cy="16" r="3"/></svg></span>
+  <span class="t"><span id="bgmLabel">Play music</span><span class="sub">Reel Memory</span></span>
+</button>
+
+<script>
+  /* ---------- background music: starts on arrival ---------- */
+  (function(){
+    const VOLUME=1;                       // 0–1; lower this if it feels loud
+    const audio=document.getElementById('bgm'), btn=document.getElementById('bgmBtn'), label=document.getElementById('bgmLabel');
+    let wanted=true;                        // user hasn't paused it
+    function ui(on){ btn.classList.toggle('off',!on); label.textContent=on?'Pause music':'Play music'; btn.setAttribute('aria-pressed',String(on)); }
+    function fadeIn(){ audio.volume=0; let v=0; const id=setInterval(()=>{ v=Math.min(VOLUME,v+VOLUME/20); audio.volume=v; if(v>=VOLUME) clearInterval(id); },80); }
+    function start(){ return audio.play().then(()=>{ fadeIn(); ui(true); return true; }).catch(()=>false); }
+    audio.addEventListener('error',()=>{ btn.hidden=true; });
+    // Try right away. Browsers may block sound until the visitor interacts with this page;
+    // in that case it starts on the first click, tap or key press anywhere.
+    start().then(ok=>{
+      if(ok) return;
+      const kick=e=>{ if(e.target.closest&&e.target.closest('#bgmBtn')) return; if(wanted&&audio.paused) start(); ['pointerdown','keydown','touchstart'].forEach(e=>removeEventListener(e,kick,true)); };
+      ['pointerdown','keydown','touchstart'].forEach(e=>addEventListener(e,kick,true));
+    });
+    btn.addEventListener('click',e=>{
+      e.stopPropagation();
+      if(audio.paused){ wanted=true; start(); } else { wanted=false; audio.pause(); ui(false); }
+    });
+  })();
+  /* ---------- photo viewer: filmstrip ---------- */
+  (function(){
+    // title / category are editable; w,h are the image sizes (used for the main photo's shape)
+    const PHOTOS=[
+      {src:'moments/m01.jpg',w:1400,h:1050,title:'Dawn at the Nile',cat:'Travel',alt:'The sun rising over a sea of clouds, seen from a plane'},
+      {src:'moments/m02.jpg',w:1400,h:1050,title:'Balloons at sunrise @ Luxor',cat:'Travel',alt:'Hot air balloons drifting over farmland at sunrise'},
+      {src:'moments/m03.jpg',w:1400,h:1050,title:'A Dragon in Hogwarts @ Universal Orlando',cat:'Travel',alt:'Sunlight streaming down a castle street as a dragon breathes fire overhead'},
+      {src:'moments/m04.jpg',w:1400,h:1400,title:'Hazy sunset @ Ottawa Museum of Art',cat:'Art',alt:'An impressionist painting of a hazy sunset over a river, in a gilded frame'},
+      {src:'moments/m05.jpg',w:1280,h:1280,title:'Me in my friend\'s eyes',cat:'Photography',alt:'Lily smiling on a sofa'},
+      {src:'moments/m06.jpg',w:787,h:1400,title:'Christmas memory',cat:'Photography',alt:'A small Christmas tree glowing by a window'},
+      {src:'moments/m07.jpg',w:1400,h:933,title:'My 9-year-old cat: Peace Chen / 陳平安',cat:'Photography',alt:'My white cat lying upside down on the bed'},
+      {src:'moments/m08.jpg',w:640,h:854,title:'My Manga line art',cat:'Art',alt:'Lily\'s hand-drawn manga pages'},
+      {src:'moments/m09.jpg',w:1400,h:1050,title:'Jänräsig / 乃日山',cat:'Travel',alt:'A snowy peak above golden autumn larches'},
+      {src:'moments/m10.jpg',w:1400,h:933,title:'riwo Gublai / 四姑娘山',cat:'Travel',alt:'A snow-covered valley with mist rolling over the mountains'}
+    ];
+    const $=id=>document.getElementById(id);
+    const row=$('pvRow'), pv=$('pv'), nameEl=$('pvName');
+    const reduce=matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let list=PHOTOS, idx=0, items=[], lock=false;
+
+    // ---- categories (top left) ----
+    const cats=['All',...new Set(PHOTOS.map(p=>p.cat))];
+    $('pvCats').innerHTML=cats.map(c=>{
+      const n=c==='All'?PHOTOS.length:PHOTOS.filter(p=>p.cat===c).length;
+      return `<li><button type="button" data-cat="${c}" aria-pressed="${c==='All'}"><span>${c}</span><span>${n}</span></button></li>`;
+    }).join('');
+    $('pvCats').addEventListener('click',e=>{
+      const b=e.target.closest('button'); if(!b) return;
+      list=b.dataset.cat==='All'?PHOTOS:PHOTOS.filter(p=>p.cat===b.dataset.cat);
+      $('pvCats').querySelectorAll('button').forEach(x=>x.setAttribute('aria-pressed',String(x===b)));
+      build(); open(0);
+    });
+
+    // ---- one element per photo; its role (main / left strip / right strip) sets its box ----
+    function build(){
+      row.innerHTML='';
+      items=list.map((p,j)=>{
+        const el=document.createElement('button');
+        el.type='button'; el.className='pv-item';
+        el.innerHTML=`<img src="${p.src}" alt="" loading="${j<7?'eager':'lazy'}"><span class="pv-name-w" aria-hidden="true">${nameEl.textContent}</span>`;
+        el.addEventListener('click',()=>{ if(j===idx) step(1); else go(j); });
+        row.appendChild(el); return el;
+      });
+    }
+
+    function metrics(){
+      const vw=pv.clientWidth, vh=pv.clientHeight, small=vw<760;
+      const N=small?2:5;                                  // strips per side
+      const S=small?Math.max(16,vw*.05):Math.min(80,Math.max(44,vw*.042)); // strip width
+      const G=small?4:5, edge=small?6:7;
+      const gapMain=small?10:Math.max(24,vw*.045);
+      const H=small?vh*.42:vh*.52;                         // strip & main height
+      const avail=vw-2*(edge+N*(S+G)+gapMain);
+      return {vw,vh,N,S,G,edge,gapMain,H,avail,top:(vh-H)/2};
+    }
+
+    function layout(){
+      const m=metrics();
+      items.forEach((el,j)=>{
+        const d=j-idx, p=list[j];
+        let x,y=m.top,w=m.S,h=m.H,op=1;
+        el.classList.toggle('is-main',d===0);
+        el.classList.remove('is-hidden');
+        if(d===0){
+          const ar=p.w/p.h;
+          w=Math.min(m.H*ar,m.avail); h=w/ar;
+          if(h>m.H){h=m.H; w=h*ar;}
+          x=(m.vw-w)/2; y=(m.vh-h)/2;
+          el.setAttribute('aria-label','Next photo');
+        }else if(d>0){                                     // upcoming: right side, anchored to the right edge
+          const k=d-1;                                      // 0 = closest to the main photo
+          x=m.vw-m.edge-(m.N-k)*m.S-(m.N-k-1)*m.G;
+          if(d>m.N){x=m.vw+20; op=0; el.classList.add('is-hidden');}
+          el.setAttribute('aria-label','Go to '+p.title);
+        }else{                                             // viewed: left side, anchored to the left edge
+          const k=-d-1;                                     // 0 = most recently viewed
+          x=m.edge+(m.N-1-k)*(m.S+m.G);
+          if(-d>m.N){x=-m.S-20; op=0; el.classList.add('is-hidden');}
+          el.setAttribute('aria-label','Go back to '+p.title);
+        }
+        Object.assign(el.style,{left:x+'px',top:y+'px',width:w+'px',height:h+'px',opacity:op});
+        el.tabIndex=el.classList.contains('is-hidden')?-1:0;
+      });
+      const p=list[idx];
+      $('pvTitle').textContent=p.title;
+      $('pvCat').textContent=p.cat;
+      $('pvCount').textContent=String(idx+1).padStart(2,'0')+' / '+String(list.length).padStart(2,'0');
+      $('pvOlder').disabled=idx===list.length-1;
+      $('pvNewer').disabled=idx===0;
+    }
+
+    // "Moments of My Life": dark on the white page, white wherever a photo passes behind it.
+    // Each photo holds a white copy of the text, kept aligned with the real one;
+    // the photo's own edges clip it, so only the part over the photo turns white.
+    function checkName(){
+      const r=nameEl.getBoundingClientRect();
+      items.forEach(el=>{
+        const w=el.lastElementChild, b=el.getBoundingClientRect();
+        w.style.left=(r.left-b.left)+'px'; w.style.top=(r.top-b.top)+'px';
+      });
+    }
+    let watchUntil=0;
+    function watchName(ms=1200){               // keep checking while strips are sliding
+      const start=!watchUntil||performance.now()>watchUntil;
+      watchUntil=performance.now()+ms;
+      if(start) (function tick(){ checkName(); if(performance.now()<watchUntil) requestAnimationFrame(tick); else watchUntil=0; })();
+    }
+
+    function go(j){ idx=Math.max(0,Math.min(list.length-1,j)); layout(); watchName(); }
+    function step(d){
+      if(lock) return; const n=idx+d; if(n<0||n>=list.length) return;
+      lock=true; setTimeout(()=>lock=false,650); go(n);
+    }
+
+    // ---- opening: everything waits off the right edge, then slides into place ----
+    function open(start){
+      idx=start;
+      const m=metrics();
+      row.classList.add('no-anim');
+      items.forEach(el=>{ Object.assign(el.style,{left:(m.vw+20)+'px',top:m.top+'px',width:m.S+'px',height:m.H+'px',opacity:0,transitionDelay:''}); });
+      void row.offsetWidth;
+      row.classList.remove('no-anim');
+      if(!reduce){
+        // strips arrive first (nearest first), then the main photo grows out of the strip line
+        items.forEach((el,j)=>{ const d=j-idx; el.style.transitionDelay=(d===0?420:d>0?(d-1)*70:0)+'ms'; });
+        setTimeout(()=>items.forEach(el=>el.style.transitionDelay=''),1500);
+      }
+      layout();
+      watchName(2000);
+    }
+
+    // ---- input ----
+    $('pvNext').addEventListener('click',()=>step(1));
+    $('pvOlder').addEventListener('click',()=>step(1));
+    $('pvNewer').addEventListener('click',()=>step(-1));
+    pv.addEventListener('wheel',e=>{ e.preventDefault(); if(Math.abs(e.deltaY)+Math.abs(e.deltaX)<8) return; step((e.deltaY||e.deltaX)>0?1:-1); },{passive:false});
+    let tx=null,ty=null;
+    pv.addEventListener('touchstart',e=>{tx=e.touches[0].clientX; ty=e.touches[0].clientY;},{passive:true});
+    pv.addEventListener('touchend',e=>{ if(tx===null) return; const dx=e.changedTouches[0].clientX-tx, dy=e.changedTouches[0].clientY-ty;
+      if(Math.max(Math.abs(dx),Math.abs(dy))>40) step((Math.abs(dx)>Math.abs(dy)?-dx:-dy)>0?1:-1); tx=null; },{passive:true});
+    document.addEventListener('keydown',e=>{
+      if(['ArrowDown','ArrowRight','PageDown',' '].includes(e.key)){e.preventDefault(); step(1);}
+      if(['ArrowUp','ArrowLeft','PageUp'].includes(e.key)){e.preventDefault(); step(-1);}
+    });
+    window.addEventListener('resize',()=>{ row.classList.add('no-anim'); layout(); void row.offsetWidth; row.classList.remove('no-anim'); checkName(); });
+
+    build();
+    requestAnimationFrame(()=>open(0));
+  })();
+</script>
+</body>
+</html>
